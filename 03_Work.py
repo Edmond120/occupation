@@ -1,5 +1,11 @@
 file = open("occupations.csv","r")
 dic = {}
+def isNumber(someString):
+    for i in range(0,len(someString)):
+        if(not(someString[i] in "0123456789.")):
+            return False
+    return True
+
 for line in file:
     length = len(line)
     inQuote = False
@@ -18,5 +24,8 @@ for line in file:
         else:
             break
         i -= 1
-    dic[line[0:splitIndex]] = line[splitIndex + 1:lineEnd]
+    if(isNumber(line[splitIndex + 1:lineEnd])):
+        dic[line[0:splitIndex]] = float(line[splitIndex + 1:lineEnd])
+    else:
+        dic[line[0:splitIndex]] = line[splitIndex + 1 : lineEnd]
 print dic
